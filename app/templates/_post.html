@@ -1,0 +1,24 @@
+    <div class="media"> 
+            <a class="pull-left" href="#"> 
+                <img class="media-object" src="{{post.author.avatar(36)}}" 
+        alt="image" width="60px" height="60px"> 
+            </a> 
+            <div class="media-body"> 
+                <h5 class="media-heading post-header">
+                    <a {% if current_user.is_authenticated %}href="{{url_for('user', username=post.author.username)}}{% endif %}"
+                    data-toggle="popover" data-placement="top" data-container="body"   
+                    title="Click to message privately or view profile"
+                    >
+                        {{post.author.username}}
+                    </a>
+                </h5> 
+                {{post.body}}
+                <span style="color:grey; float:right;">{{post.number_of_likes()}} Likes</span>
+                    {% if like_form %}
+                        <form action="{{url_for('like', post_id=post.id)}}" method="POST" class="form-inline">
+                            {{like_form.hidden_tag()}}
+                            {{like_form.submit(value="Like", class="btn btn-success")}}
+                        </form>
+                    {% endif %}
+            </div>
+    </div>    

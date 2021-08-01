@@ -1,0 +1,19 @@
+<div class="reply-class">
+{% for reply in replies %}
+{% if reply.post_replied.id == post.id %}
+    <table class="table-hover">
+        <tr>
+            <td><img src="{{reply.author.avatar(36)}}" alt="image"></td>
+            <td style="color:grey;">
+                <h7 class="reply-header" style="font-weight:600">
+                    <a href="{{url_for('user', username=reply.author.username)}}">
+                        {{reply.author.username}}
+                    </a>
+                </h7><br>
+                {{reply.body}}
+            </td>
+        </tr>
+    </table>
+{% endif %}
+{% endfor %}
+</div>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Messages</h1>
+    {% for post in messages %}
+        
+        <div class="media"> 
+            <a class="pull-left" href="#"> 
+                <img class="media-object" src="{{post.author.avatar(36)}}" 
+        alt="image" width="60px" height="60px"> 
+            </a> 
+            <div class="media-body"> 
+                <h5 class="media-heading post-header">
+                    <a {% if current_user.is_authenticated %}href="{{url_for('user', username=post.author.username)}}{% endif %}">
+                        {{post.author.username}}
+                    </a>
+                </h5> 
+                {{post.body}}
+                <p>{{current_user.previously_said(post.author.id, post.id)}} </p>
+                <p>
+                    <a href="{{url_for('send_message', recipient=post.author.username)}}" class="btn btn-success">reply</a>
+                </p>
+            </div>
+    </div>   
+
+    {% endfor %}
+{% endblock content %}

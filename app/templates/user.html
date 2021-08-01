@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table>
+                <tr valign="top">
+                    <td><img src="{{ user.avatar(128) }}" alt="profile_image"></td>
+                    <td>
+                        <h1>User: {{ user.username }}</h1>
+                        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                        {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%I%p on %B %d') }}</p>{% endif %}
+                        <p>{{user.followers.count()}} followers, {{user.followed.count()}} following</p>
+                        {% if user == current_user %}
+                        <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
+                        {% endif %}
+                        {% if not current_user.is_following(user) %}
+                        <p>
+                            <form action="{{url_for('follow', username=user.username)}}" method="POST">
+                                {{follow_form.hidden_tag()}}
+                                {{follow_form.submit(value="Follow", class="btn btn-success")}}
+                            </form>
+                        </p>
+                        {% else %}
+                        <p>
+                            <form action="{{url_for('unfollow', username=user.username)}}" method="POST">
+                                {{follow_form.hidden_tag()}}
+                                {{follow_form.submit(value="Unfollow", class="btn btn-success")}}
+                            </form>
+                        </p>
+                        {% endif %}
+                        {% if user != current_user %}
+                        <a href="{{ url_for('send_message',
+                                        recipient=user.username) }}"class="btn btn-primary">
+                                        Message Privately
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+        <hr>
+        <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        {% for post in posts %}
+            {% if post.author.username == current_user.username %}
+                {% include '_post.html' %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+</div>
+{% endblock content %}
