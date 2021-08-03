@@ -65,9 +65,9 @@ class User(db.Model, UserMixin):
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
 
-    def previously_said(self, user_id, post_id):
+    def previously_said(self, user_id):
         latest = Message.query.filter(
-            Message.sender_id == self.id, Message.recipient_id == user_id, Message.id == post_id).order_by(
+            Message.sender_id == self.id, Message.recipient_id == user_id).order_by(
             Message.timestamp.desc()
         ).first()
         return latest
@@ -110,7 +110,7 @@ class Message(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Message {}>'.format(self.body)
+        return '{}'.format(self.body)
 
 @login.user_loader
 def load_user(id):

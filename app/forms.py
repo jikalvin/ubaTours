@@ -24,7 +24,7 @@ class RegisterForm(FlaskForm):
             raise ValidationError('User already exists')
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Submit')
 

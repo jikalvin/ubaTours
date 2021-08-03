@@ -12,9 +12,16 @@ from datetime import datetime
 @app.route('/index')
 def index():
     login_form = LoginForm()
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('index', page=posts.prev_num) \
+        if posts.has_prev else None
 
-    return render_template('index.html', posts=posts, title="Home", login_form=login_form)
+    return render_template('index.html', posts=posts.items, title="Home", login_form=login_form,
+    next_url=next_url, prev_url=prev_url)
 
 @app.before_request
 def before_request():
@@ -28,13 +35,13 @@ def login():
         return redirect(url_for('index'))
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        user = User.query.filter_by(email=login_form.email.data).first()
+        user = User.query.filter_by(username=login_form.username.data).first()
         if user is None or not user.check_password(login_form.password.data):
             flash('username or password invalid')
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
         login_user(user)
         return redirect(url_for('user_index'))
-    return render_template('login.html', title="Login", login_form=login_form)
+    return render_template('index.html', title="Login", login_form=login_form)
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
@@ -70,19 +77,32 @@ def user_index():
         db.session.commit()
         flash('Post added')
         return redirect(url_for('user_index'))
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('user_index', page=posts.prev_num) \
+        if posts.has_prev else None
     #get the post_id from the replies
     replies = Replies.query.all()
-    return render_template('user_index.html', form=form, posts=posts,
-                 reply_form=reply_form, replies=replies, login_form=login_form, like_form=like_form)
+    return render_template('user_index.html', form=form, posts=posts.items,
+                 reply_form=reply_form, replies=replies, login_form=login_form, 
+                 like_form=like_form, next_url=next_url, prev_url=prev_url)
 
 @app.route('/user/<username>')
 def user(username):
     follow_form = FollowForm()
     user = User.query.filter_by(username=username).first_or_404()
 
-    posts = Post.query.all()
-    return render_template('user.html', user=user, posts=posts, follow_form=follow_form)
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.paginate(page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('user_index', page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template('user.html', user=user, posts=posts.items, follow_form=follow_form,
+    next_url=next_url, prev_url=prev_url)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -163,9 +183,16 @@ def reply(post_id):
         db.session.add(reply)
         db.session.commit()
         return redirect(url_for('user_index'))
+    page = request.args.get('page', 1, type=int)
     replies = Replies.query.filter_by(post_id=post_id).all()
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template('user_index.html', reply_form=reply_form, replies=replies, posts=posts, form=form)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('user_index', page=posts.prev_num) \
+        if posts.has_prev else None
+    return render_template('user_index.html', reply_form=reply_form, replies=replies, 
+    posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
 
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
@@ -187,12 +214,33 @@ def send_message(recipient):
 def messages():
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
-    messages = current_user.messages_received.order_by(Message.timestamp.desc()).all()
-    return render_template('messages.html', messages=messages)
+    page = request.args.get('page', 1, type=int)
+    messages = current_user.messages_received.order_by(
+        Message.timestamp.desc()).paginate(page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_index', page=messages.next_num) \
+        if messages.has_next else None
+    prev_url = url_for('user_index', page=messages.prev_num) \
+        if messages.has_prev else None
+    return render_template('messages.html', messages=messages.items, next_url=next_url,
+    prev_url=prev_url)
 
 @app.route('/for_you')
 def for_you():
-    posts = current_user.followed_posts()
+    page = request.args.get('page', 1, type=int)
+    posts = current_user.followed_posts().paginate(page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user_index', page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('user_index', page=posts.prev_num) \
+        if posts.has_prev else None
     replies = Replies.query.all()
 
-    return render_template('for_you.html', posts=posts, replies=replies)
+    return render_template('for_you.html', posts=posts.items, replies=replies, next_url=next_url,
+    prev_url=prev_url)
+
+@app.route('/how_to')
+def how_to():
+    return render_template('how_to.html', title="How to")
+
+@app.route('/take_a_tour')
+def take_a_tour():
+    return render_template('take_a_tour.html', title="Take a tour")
