@@ -17,7 +17,7 @@
                     {% if like_form %}
                         <form action="{{url_for('like', post_id=post.id)}}" method="POST" class="form-inline">
                             {{like_form.hidden_tag()}}
-                            {{like_form.submit(value="Like", class="btn btn-success")}}
+                            {{like_form.submit(value="Like", class="btn btn-success float-left")}}
                         </form>
                     {% endif %}
             </div>

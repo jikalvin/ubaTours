@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="blog-post">
+                <h2 class="blog-post-title">About the university of Bamenda</h2>
+                <p class="blog-post-meta">From <a href="https://en.wikipedia.org/w/index.php?
+title=University_of_Bamenda&oldid=969558446">Wikipedia</a></p>
+                <p>
+                The university opened in 2011 as the second English language university in Cameroon, 
+                the University of Buea having been the only one up till then.It began with the Higher 
+                Teachers Training College and the Higher Technical Teachers Training College as the 
+                only faculties.
+                </p>
+                <h3 class="blog-post-title">Admission</h3>
+                <p>
+                Admission into the higher institutes/university colleges in the University of Bamenda is done
+                through competitive entrance exams which involve written and oral examination. Students into
+                other faculties are required to follow a registration procedure which involves presentation of
+                results and study of files.
+                </p>
+                <p>
+                A pass in ordinary level English is a major requirement for students from Cameroon. Students
+                from other countries are expected to possess proficiency in the English language; without this
+                requirement, the applicant is automatically disqualified.
+                </p>
+                <h3 class="blog-post-title">Faculties and Schools</h3>
+                <p>
+                The University of Bamenda is made up of the following faculties, schools and colleges:
+                <table class="table table-hover">
+                    <tr>
+                        <td>Faculty of Arts</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty of Law and Political Science</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty of Economics and Management Science</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty of Education</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty of Science</td>
+                    </tr>
+                    <tr>
+                        <td>Faculty of Health science</td>
+                    </tr>
+                    <tr>
+                        <td>The College of Technology</td>
+                    </tr>
+                    <tr>
+                        <td>The Higher Institute of Commerce and Management</td>
+                    </tr>
+                    <tr>
+                        <td>The Higher Institute of Transport and logistics</td>
+                    </tr>
+                    <tr>
+                        <td>The Higher Teachers’ Training College of Bamenda in Bambili</td>
+                    </tr>
+                    <tr>
+                        <td>The Higher Technical Teachers’ Training College of Bamenda in Bambili</td>
+                    </tr>
+                    <tr>
+                        <td>National Higher Polytechnic Institute (NAHPI, School of Engineering) https://www.nahpi.cm</td>
+                    </tr>
+                </table>
+                </p>
+                <p>Visit the school's website <a href="http://uniba.cm/">www.uniba.cm</a></p>
+            </div>
+        </div>
+        <div class="col-md-2 blog-post">
+            <a href="{{url_for('static', filename="pdfs/uba-history.pdf")}}">Get the pdf</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

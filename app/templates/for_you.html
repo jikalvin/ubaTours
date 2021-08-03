@@ -3,6 +3,13 @@
 {% block content %}
 <div class="row">
     <div class="col-md-6">
+        {% if not posts[0] %}
+            <h1>Oops, looks like you are not following any one yet</h1>
+            <p>
+                To follow or send a private message to any user,
+                click on the user's username in your <a href="{{url_for('user_index')}}">home page.</a>
+            </p>
+        {% endif %}
         {% for post in posts %}
             {% include '_post.html' %}
             {% include '_reply.html' %}

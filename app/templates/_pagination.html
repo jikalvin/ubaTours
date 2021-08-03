@@ -1,0 +1,8 @@
+<ul class="pager">
+{% if prev_url %}
+  <li class="previous btn-default"><a href="{{ prev_url }}">&larr; Older Posts</a></li> 
+{% endif %}
+{% if next_url %}
+  <li class="next btn btn-default"><a href="{{ next_url }}">Newer Posts &rarr;</a></li> 
+</ul>
+{% endif %}

@@ -5,25 +5,56 @@
 
     <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+          <h1 class="display-4 font-italic">Admission into the university of Bamenda</h1>
+          <p class="lead my-3">Find out how to apply for admission, create a student account, register courses and more</p>
+          <p class="lead mb-0"><a href="{{url_for('how_to')}}" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
     </div>
 
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h4 class="text-center large">COMMUNIQUE FOR SO SO AND SO THING</h4>
-                <p>So so and so person upstairs just said that...<p>
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Entrance examination into HTTC (ENS) Bambili</h2>
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/comms/1.jfif")}}" alt="addmission dropdown">
+                    <p>
+                    The competitive entrance examination into HTTC Bambili has been launched, find
+                    the communique below
+                    </p>
+                    <a href="{{url_for('static', filename='pdfs/ens_1_1.pdf')}}">first year of first cycle</a><br>
+                    <a href="{{url_for('static', filename='pdfs/ens_1_2.pdf')}}">first year of second cycle</a>
+                </div>
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Entrance examination into FHS Bambili</h2>
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/comms/fhs.jpg")}}" alt="addmission dropdown">
+                    <p>
+                    To launch the competitive entrance examination and fix the number of places into 
+                    the <b>first year</b> of...
+                    </p>
+                    <a href="{{url_for('static', filename='pdfs/fhs.pdf')}}">The release</a><br>
+                </div>
+                <div class="blog-post">
+                    <h2 class="blog-post-title">Entrance examination into COLTECH of UBa</h2>
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/comms/coltech.png")}}" alt="addmission dropdown">
+                    <p>
+                    A competitive entrance examination for the admission of students into the first year of 
+                    the College of Technology of The University  of Bamenda has been launched  for the 2021/2022 
+                    academic  year  in the  following  programmes... 
+                    </p>
+                    <a href="{{url_for('static', filename='pdfs/coltech.pdf')}}">The release</a><br>
+                </div>
+
+                <hr/>
             </div>
             <div class="col-md-6">
-                <h4 class="text-center large">MOST RECENT POSTS</h4>
+                <h4 class="blog-post-title">Users recently said:</h4>
                 <div class="alert alert-info">Login or sign up to see replies and ask questions</div>
                 {% for post in posts %}
                 {% include '_post.html' %}
                 <hr/>
                 {% endfor %}
+                {% include '_pagination.html' %}
+                <hr/>
             </div>
         </div>
     </div>

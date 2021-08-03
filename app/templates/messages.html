@@ -2,6 +2,13 @@
 
 {% block content %}
     <h1>Messages</h1>
+    {% if not messages[0] %}
+            <h1>You do not have any messages yet</h1>
+            <p>
+                To follow or send a private message to any user,
+                click on the user's username in your <a href="{{url_for('user_index')}}">home page.</a>
+            </p>
+        {% endif %}
     {% for post in messages %}
         
         <div class="media"> 
@@ -16,12 +23,14 @@
                     </a>
                 </h5> 
                 {{post.body}}
-                <p>{{current_user.previously_said(post.author.id, post.id)}} </p>
+                <p class="previously-said">
+                    (You previously said) - 
+                    {{current_user.previously_said(post.author.id)}}
+                </p>
                 <p>
                     <a href="{{url_for('send_message', recipient=post.author.username)}}" class="btn btn-success">reply</a>
                 </p>
             </div>
     </div>   
-
     {% endfor %}
 {% endblock content %}

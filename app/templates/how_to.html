@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            <nav class="col-md-2 col-sm-4 d-md-block bg-dark sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#apply-for-admission">
+                    <span data-feather="home"></span>
+                    Apply for submission <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#create-student-account">
+                    <span data-feather="users"></span>
+                    Create student account
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pay-school-fees">
+                    <span data-feather="file"></span>
+                    Pay school fees
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#register-for-courses">
+                    <span data-feather="shopping-cart"></span>
+                    Register for courses
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#create-elearning-account">
+                    <span data-feather="bar-chart-2"></span>
+                    Create E-learning account
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#how-to-use-elearning">
+                    <span data-feather="layers"></span>
+                    How to use the E-learning platform
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="col-md-1"></div>
+        <div class="col-8">
+            <div class="blog-post" id="apply-for-admission">
+                <h2 class="blog-post-title">Apply For Admission</h2>
+                <p class="blog-post-meta">August 3, 2021 by <a href="#">Alvin</a></p>
+
+                <ol>
+                    <li>Go to the school's website <a href="http://uniba.cm/">uniba.cm</a> </li>
+                    <li>
+                    Go to the admissions dropdown
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/1.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Click on create account
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/2.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Fill the information required and submit
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/3.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Choose the school/faculty you are applying for and also choose the program
+                    you wish to apply for
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/7.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Pay platform and registration charges and wait for your admission letter
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/8.png")}}" alt="addmission dropdown">
+                    </li>
+                </ol>
+            </div>
+
+            <div class="blog-post" id="create-student-account">
+                <h2 class="blog-post-title">Create Student Account</h2>
+                <ol>
+                    <li>Go to the schools website <a href="http://uniba.cm/">uniba.cm</a></li>
+                    <li>
+                    Under the admissions dropdown select check admission list
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/account/0.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Search for the uba student online platform and on the search
+                    results select "create student account"
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/account/1.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                    Fill in the information required and submit
+                    <img class="img-fluid img-add" src="{{url_for('static', filename="images/account/2.png")}}" alt="addmission dropdown">
+                    </li>
+                </ol>
+            </div>
+
+            <div class="blog-post" id="pay-school-fees">
+                <h2 class="blog-post-title">Pay School Fees</h2>
+                <ol>
+                    <li>
+                        Go to <a href="https://www.ubastudent.online/">ubastudent.online</a>
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/account/3.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                        Click on the "pay fees tab"
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/10.png")}}" alt="addmission dropdown">
+                    </li>
+                </ol>
+            </div>
+
+            <div class="blog-post" id="register-for-courses">
+                <h2 class="blog-post-title">Register For Courses</h2>
+                <ol>
+                    <li>
+                        Go to <a href="https://www.ubastudent.online/">ubastudent.online</a>
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/account/3.png")}}" alt="addmission dropdown">
+                    </li>
+                    <li>
+                        Click on the "course registration tab"
+                        <img class="img-fluid img-add" src="{{url_for('static', filename="images/apply/11.png")}}" alt="addmission dropdown">
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}

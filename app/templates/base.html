@@ -15,7 +15,7 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="#">Subscribe</a>
+            <a class="text-muted" href="#">Contact: 683340380</a>
           </div>
           <div class="col-4 text-center large">
             <a class="blog-header-logo text-dark" href="#" class="large">UBa Tours</a>
@@ -29,9 +29,9 @@
       <div class="nav-scroller py-1 mb-2 my-nav font-14">
         <nav class="nav d-flex justify-content-between">
           <a class="p-2 text-muted" href="{{url_for('index')}}">Home</a>
-          <a class="p-2 text-muted" href="#">News</a>
+          <a class="p-2 text-muted" href="{{url_for('how_to')}}">How to</a>
           <a class="p-2 text-muted" href="{{url_for('login')}}" data-toggle="modal" data-target="#myModal">Login</a>
-          <a class="p-2 text-muted" href="#">Take a tour</a>
+          <a class="p-2 text-muted" href="{{url_for('take_a_tour')}}">About UBa</a>
         </nav>
       </div>
 
@@ -72,8 +72,8 @@
                       <form role="form" method="POST" action="{{url_for('login')}}">
                       {{login_form.hidden_tag()}}
                       <div class="form-group">
-                          {{login_form.email.label}}
-                          {{login_form.email(size=32, class="form-control")}}
+                          {{login_form.username.label}}
+                          {{login_form.username(size=32, class="form-control")}}
                       </div>
                       <div class="form-group">
                           {{login_form.password.label}}
@@ -114,6 +114,7 @@
       </p>
     </footer>
 
+    {{moment.include_moment()}}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="{{url_for('static', filename='assets/js/vendor/jquery-slim.min.js')}}"><\/script>')</script>
     <script src="{{url_for('static', filename='assets/js/vendor/popper.min.js')}}"></script>
